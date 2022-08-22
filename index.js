@@ -62,31 +62,65 @@ class Menu {
     parseOrderOptions() {
         const mealType = this.order[0];
         const mealChoices = this.order[1];
-        console.log('mealChoices', mealChoices)
-        if (!mealChoices.includes('1') && !mealChoices.includes('2')) {
-            console.log("Unable to process: Main is missing, side is missing");
-        } else if (!mealChoices.includes('1')) {
-            console.log("Unable to process: Main is missing");
-        } else if (!mealChoices.includes('2')) {
-            console.log("Unable to process: Side is missing");
-        }
-        if (!mealType.includes('dinner') && !mealChoices.includes('3')) {
-            const drink = "Water";
-            return drink;
+        // console.log('mealChoices', mealChoices)
+        if (!mealType.includes('dinner')) {
+            if (!mealChoices.includes('1') && !mealChoices.includes('2')) {
+                console.log("Unable to process: Main is missing, side is missing, dessert is missing")
+                return;
+            } else if (!mealChoices.includes('1')) {
+                console.log("Unable to process: Main is missing");
+                return;
+            } else if (!mealChoices.includes('2')) {
+                console.log("Unable to process: Side is missing");
+                return;
+            } else {
+                return this.order;
+            }
+        } else if (mealType.includes('dinner')) {
+            if (!mealChoices.includes('1') && !mealChoices.includes('2') && !mealChoices.includes('4')) {
+                    console.log("Unable to process: Main is missing, side is missing, dessert is missing");
+                    return;
+                } else if (!mealChoices.includes('1')) {
+                    console.log("Unable to process: Main is missing");
+                    return;
+                } else if (!mealChoices.includes('2')) {
+                    console.log("Unable to process: Side is missing");
+                    return;
+                } else if (!mealChoices.includes('4')) {
+                    console.log("Unable to process: dessert is missing")
+                    return;
+                } else {
+                    return this.order;
+                }
         }
     };
 
     orderBreakfast() {
         const breakfastOrder = this.parseOrderOptions();
-        
+        if (breakfastOrder[1].includes('1') && breakfastOrder[1].includes('2') && breakfastOrder[1].includes('3')) {
+            console.log(Meal["Breakfast"][1], Meal["Breakfast"][2], Meal["Breakfast"][3])
+        } else if (breakfastOrder[1].includes('1') && breakfastOrder[1].includes('2') && !breakfastOrder[1].includes('3')) {
+            console.log(Meal["Breakfast"][1], Meal["Breakfast"][2], "Water")
+        }
+
     };
 
     orderLunch() {
-        this.parseOrderOptions();
+        const lunchOrder = this.parseOrderOptions();
+        if (lunchOrder[1].includes('1') && lunchOrder[1].includes('2') && lunchOrder[1].includes('3')) {
+            console.log(Meal["Lunch"][1], Meal["Lunch"][2], Meal["Lunch"][3])
+        } else if (lunchOrder[1].includes('1') && lunchOrder[1].includes('2') && !lunchOrder[1].includes('3')) {
+            console.log(Meal["Lunch"][1], Meal["Lunch"][2], "Water")
+        }
     };
 
     orderDinner() {
-        this.parseOrderOptions();
+        const dinnerOrder = this.parseOrderOptions();
+        if (dinnerOrder[1].includes('1') && dinnerOrder[1].includes('2') && dinnerOrder[1].includes('3') && dinnerOrder[1].includes('4')) {
+            console.log(Meal["Dinner"][1], Meal["Dinner"][2], Meal["Dinner"][3], "Water", Meal["Dinner"][4])
+        } else if (dinnerOrder[1].includes('1') && dinnerOrder[1].includes('2') && !dinnerOrder[1].includes('3') && dinnerOrder[1].includes('4')) {
+            console.log(Meal["Dinner"][1], Meal["Dinner"][2], "Water", Meal["Dinner"][4])
+        }
     };
 
 
